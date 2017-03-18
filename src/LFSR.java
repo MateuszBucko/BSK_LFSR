@@ -9,10 +9,13 @@ public class LFSR {
     public LFSR(String polynomial, String start){
         this.polynomial = polynomial;
         this.start = start;
-        len = (int) (Math.pow(2,start.length())-1);
+    }
+
+    public LFSR() {
     }
 
     public void generate(){
+        len = (int) (Math.pow(2,start.length())-1);
         System.out.println(start);
         for(int i=0;i<len;i++){
             Integer b = 0;
@@ -28,4 +31,19 @@ public class LFSR {
 
     }
 
+    public String getPolynomial() {
+        return polynomial;
+    }
+
+    public void setPolynomial(String polynomial) {
+        this.polynomial = polynomial;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
 }
