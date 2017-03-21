@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by X on 16.03.2017.
  */
@@ -5,6 +8,7 @@ public class LFSR {
     private String polynomial = "";
     private String start = "";
     private int len = 0;
+    private List<Integer> key = new ArrayList<Integer>();
 
     public LFSR(String polynomial, String start){
         this.polynomial = polynomial;
@@ -25,6 +29,7 @@ public class LFSR {
                 }
             }
             b = b%2;
+            key.add(b);
             start = b.toString() + start.substring(0,start.length()-1);
             System.out.println(start);
         }
@@ -45,5 +50,9 @@ public class LFSR {
 
     public void setStart(String start) {
         this.start = start;
+    }
+
+    public List<Integer> getKeyStream() {
+        return key;
     }
 }

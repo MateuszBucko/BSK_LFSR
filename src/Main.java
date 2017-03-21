@@ -60,6 +60,23 @@ public class Main {
                         break;
                     }
                 case 2:
+
+                    SSC ssc = new SSC();
+
+                    System.out.print("Choose polynomial: ");
+                    String polynomial = sc.nextLine();
+                    ssc.setPolynomial(polynomial);
+
+                    System.out.print("Choose seed vector: ");
+                    String seed = sc.nextLine();
+                    ssc.setSeedvector(seed);
+
+                    System.out.print("Choose number: ");
+                    String number = sc.nextLine();
+                    ssc.setStart(number);
+
+                    ssc.generate();
+
                     break;
                 case 3:
                     break;
@@ -72,7 +89,7 @@ public class Main {
 
     private static void createMenu() {
         System.out.println(ANSI_RED + "1. Generate LFSR ");
-        System.out.println("2. TODO");
+        System.out.println("2. SSC_Encode");
         System.out.println("3. TODO" + ANSI_RESET);
     }
 
