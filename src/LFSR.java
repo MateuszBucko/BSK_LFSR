@@ -55,4 +55,8 @@ public class LFSR {
     public List<Integer> getKeyStream() {
         return key;
     }
+
+    public int getLen() {
+        return len;
+    }
 }

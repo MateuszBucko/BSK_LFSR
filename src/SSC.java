@@ -32,7 +32,7 @@ public class SSC {
         lfsr.generate();
 
 
-        List<Integer> key = new ArrayList<Integer>();
+        List<Integer> key;
 
         key = lfsr.getKeyStream();
 
@@ -43,12 +43,11 @@ public class SSC {
 
             Integer ciphertextnumber=0;
 
-            ciphertextnumber = (key.get(i) + Integer.parseInt(start.substring(i,i+1)))%2;
+            ciphertextnumber = (key.get(i%lfsr.getLen()) + Integer.parseInt(start.substring(i,i+1)))%2;
 
             ciphertext= ciphertextnumber.toString() + ciphertext;
 
-            String reverse = new StringBuffer(ciphertext).
-            reverse().toString();
+            String reverse = new StringBuffer(ciphertext).reverse().toString();
 
             System.out.println(reverse);
 
