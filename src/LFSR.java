@@ -31,7 +31,7 @@ public class LFSR {
             b = b%2;
             key.add(b);
             start = b.toString() + start.substring(0,start.length()-1);
-            System.out.println(start);
+            //System.out.println(start);
         }
 
     }
@@ -54,6 +54,16 @@ public class LFSR {
 
     public List<Integer> getKeyStream() {
         return key;
+    }
+
+    public Byte getByteLFSR(){
+        List<Integer> key = getKeyStream();
+        String t = "";
+        for(int i=0;i<8;i++){
+            t+=key.get(0).toString();
+        }
+        int bInt = Integer.parseInt(t,2);
+        return (byte) bInt;
     }
 
     public int getLen() {

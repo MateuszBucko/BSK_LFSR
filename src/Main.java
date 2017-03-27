@@ -1,7 +1,7 @@
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -60,7 +60,6 @@ public class Main {
                         break;
                     }
                 case 2:
-
                     SSC ssc = new SSC();
 
                     System.out.print("Choose polynomial: ");
@@ -78,7 +77,47 @@ public class Main {
                     ssc.generate();
 
                     break;
+
+
                 case 3:
+                    System.out.print("Choose polynomial: ");
+                    String polynomialSSC = sc.nextLine();
+
+
+                    System.out.print("Choose seed vector: ");
+                    String seedSSC = sc.nextLine();
+
+                    System.out.print("File name to encode: ");
+                    String fileName = sc.nextLine();
+
+                    System.out.println("Result fileName");
+                    String resultFileName = sc.nextLine();
+
+
+                    LFSR lfsr = new LFSR();
+                    lfsr.setPolynomial(polynomialSSC);
+                    lfsr.setStart(seedSSC);
+                    lfsr.generate();
+
+                    List<Integer> keys = lfsr.getKeyStream();
+
+                    File file = new File(fileName);
+                    byte[] fileData = new byte[(int) file.length()];
+                    DataInputStream dis = new DataInputStream(new FileInputStream(file));
+                    dis.readFully(fileData);
+
+
+
+                    FileOutputStream fileOutputStream = new FileOutputStream(new File("answer"));
+                    byte[] result = new byte[fileData.length];
+
+                    for(int i=0; i<fileData.length;i++){
+                        byte xor = (byte)(0xff & ((int)lfsr.getByteLFSR()) ^ ((int)fileData[i]));
+                        result[i] = xor;
+
+                    }
+                    Files.write(Paths.get(resultFileName), result);
+                    dis.close();
                     break;
 
             }
@@ -90,7 +129,7 @@ public class Main {
     private static void createMenu() {
         System.out.println(ANSI_RED + "1. Generate LFSR ");
         System.out.println("2. SSC_Encode");
-        System.out.println("3. TODO" + ANSI_RESET);
+        System.out.println("3. SSC form File test.bin" + ANSI_RESET);
     }
 
 

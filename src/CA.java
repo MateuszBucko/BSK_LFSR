@@ -12,7 +12,7 @@ public class CA {
     }
 
     public void generate(){
-        
+
     }
 
 
