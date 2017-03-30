@@ -8,6 +8,7 @@ public class LFSR {
     private String polynomial = "";
     private String start = "";
     private int len = 0;
+    private int wsk=0;
     private List<Integer> key = new ArrayList<Integer>();
 
     public LFSR(String polynomial, String start){
@@ -31,7 +32,7 @@ public class LFSR {
             b = b%2;
             key.add(b);
             start = b.toString() + start.substring(0,start.length()-1);
-            //System.out.println(start);
+            System.out.println(start);
         }
 
     }
@@ -59,8 +60,11 @@ public class LFSR {
     public Byte getByteLFSR(){
         List<Integer> key = getKeyStream();
         String t = "";
+
         for(int i=0;i<8;i++){
-            t+=key.get(0).toString();
+            t+=key.get(wsk).toString();
+            wsk++;
+            wsk=wsk%key.size();
         }
         int bInt = Integer.parseInt(t,2);
         return (byte) bInt;

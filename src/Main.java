@@ -90,7 +90,7 @@ public class Main {
                     System.out.print("File name to encode: ");
                     String fileName = sc.nextLine();
 
-                    System.out.println("Result fileName");
+                    System.out.print("Result file name: ");
                     String resultFileName = sc.nextLine();
 
 
@@ -112,6 +112,7 @@ public class Main {
                     byte[] result = new byte[fileData.length];
 
                     for(int i=0; i<fileData.length;i++){
+                        System.out.println("BYTE : " + lfsr.getByteLFSR());
                         byte xor = (byte)(0xff & ((int)lfsr.getByteLFSR()) ^ ((int)fileData[i]));
                         result[i] = xor;
 
