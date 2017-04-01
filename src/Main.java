@@ -129,19 +129,19 @@ public class Main {
                     autoKeyLfsr.setSeed(autokeySeed);
                     autoKeyLfsr.generate();
 
-                    List<Integer> keys = autoKeyLfsr.getKeyStream();
 
                     File fileToEncode = new File(autoKeyFileNameToEncode);
                     byte[] data = new byte[(int) fileToEncode.length()];
                     DataInputStream diss = new DataInputStream(new FileInputStream(fileToEncode));
                     diss.readFully(data);
 
+
                     int i = 0;
                     byte[] resultArray = new byte[(int) fileToEncode.length()];
 
                     for (byte b : data) {
 
-                       // System.out.println(i/data.length * 100 + "%");
+                        // System.out.println(i/data.length * 100 + "%");
                         String bits = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
                         String res = "";
                         for (char bb : bits.toCharArray()) {
@@ -151,10 +151,7 @@ public class Main {
                             res += xored.toString();
 
                         }
-
-                        //  System.out.println(res);
-
-                        byte resByte = (byte) Integer.parseInt(res);
+                        Byte resByte = (byte) (int) Integer.valueOf(res, 2);
 
                         resultArray[i] = resByte;
                         i++;
@@ -197,14 +194,14 @@ public class Main {
                         String bits = String.format("%8s", Integer.toBinaryString(dataBytes & 0xFF)).replace(' ', '0');
                         String res = "";
                         for (char bb : bits.toCharArray()) {
-                            Integer xx = ((int)bb+autoKeyLfsrDecode.generateOne())%2;
+                            Integer xx = ((int) bb + autoKeyLfsrDecode.generateOne()) % 2;
                             autoKeyLfsrDecode.setSeed(bb + (autoKeyLfsrDecode.getSeed().substring(0, autoKeyLfsrDecode.getSeed().length() - 1)));
 
                             res += xx.toString();
                         }
 
 
-                        byte resByte = (byte) Integer.parseInt(res);
+                        Byte resByte = (byte) (int) Integer.valueOf(res, 2);
 
                         resArray[j] = resByte;
                         j++;

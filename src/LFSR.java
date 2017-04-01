@@ -21,7 +21,7 @@ public class LFSR {
 
     public void generate(){
         len = (int) (Math.pow(2, seed.length())-1);
-        System.out.println(seed);
+      //  System.out.println(seed);
         for(int i=0;i<len;i++){
             Integer b = 0;
             for(int j=0;j<polynomial.length();j++){
@@ -32,7 +32,7 @@ public class LFSR {
             b = b%2;
             key.add(b);
             seed = b.toString() + seed.substring(0, seed.length()-1);
-            System.out.println(seed);
+          //  System.out.println(seed);
         }
 
     }
