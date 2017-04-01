@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +26,7 @@ public class SSC {
 
         lfsr.setPolynomial(polynomial);
 
-        lfsr.setStart(seedvector);
+        lfsr.setSeed(seedvector);
 
         lfsr.generate();
 
