@@ -1,0 +1,54 @@
+package dao;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+/**
+ * Created by X on 01.05.2017.
+ */
+public class BaseDao<T,K> implements IBaseDao<T,K>{
+
+    @PersistenceContext(unitName = "auctionsDataBase")
+    EntityManager em;
+    private final Class<T> type;
+
+
+    public BaseDao(Class clazz) {
+        type = clazz;
+    }
+
+
+    @Override
+    public void save(T t) {
+        em.getTransaction().begin();
+        em.persist(t);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    @Override
+    public void delete(T t) {
+        em.getTransaction().begin();
+        t = em.merge(t);
+        em.remove(t);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    @Override
+    public void update(T t) {
+        em.getTransaction().begin();
+        em.merge(t);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    @Override
+    public T findById(K id) {
+        T dto = em.find(type, id);
+        em.close();
+        return dto;
+    }
+
+
+}
